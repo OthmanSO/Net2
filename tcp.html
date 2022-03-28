@@ -10,18 +10,18 @@
     <title>SNMP Maneger</title>
 </head>
 
-<body>
+<body onload="getTCP()">
 
-        <table>
+        <table id="tcpTable">
             <tr>
                 <td>TCPLocalAddress</td>
                 <td>TCPLocalPort</td>
             </tr>
 
-            <tr>
+            <!-- <tr>
                 <td id="TCPLocalAddress"></td>
                 <td id="TCPLocalPort"></td>
-            </tr>
+            </tr> -->
 
 
         </table>
@@ -29,6 +29,33 @@
     <a href="system.html">&lt;</a>
     <a href="index.html">home</a>
     <a href="udp.html">&gt;</a>
+
+
+    <script>
+    function getTCP(){
+        str = "TCP"; //connection value
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+
+            var TCPAdressPortArray = (this.responseText).split("|"); //split address and array --> Adress,Port
+
+            for(let i =0 ; i<udpAdressPortArray.length ;i++){
+                var table = document.getElementById("tcpTable");
+                var row = table.insertRow(i); //which row to be inserted
+                var cell1 = row.insertCell(0); //which column to be inserted
+                var cell2 = row.insertCell(1);
+
+                AP_ARR = TCPAdressPortArray[i].split(","); //split every index in TCPAdressPortArray (Adress,Port)
+                
+                cell1.innerHTML = AP_ARR[0]; //the data that we need to insert it to cell
+                cell2.innerHTML = AP_ARR[1];
+            }
+        }
+
+        xhttp.open("GET", "dataGet.php?data="+str);
+        xhttp.send();
+    }
+</script>
     
 </body>
 

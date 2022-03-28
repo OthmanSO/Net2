@@ -41,17 +41,35 @@
 
             <tr>
                 <td>Contact</td>
-                <td><input id="Contact" type="text" name="contact" value= /></td>
+                <td><input id="Contact" type="text" name="contact" value="" /></td>
             </tr>
 
         </table>
 
-        <input onclick="" type="submit" value="Update" />
+        <input onclick="getSystemInfo()" type="submit" value="Update" />
     </form>
 
     <a href="index.html">&lt;</a>
     <a href="tcp.html">&gt;</a>
-    
+
+    <script>
+        function getSystemInfo(){
+        str = "systeminfo"; //connection value
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+            var systemInfoArray = (this.responseText).split("|&|");
+            document.getElementById("Device Name").innerHTML = systemInfoArray[0];
+            document.getElementById("Description").innerHTML = systemInfoArray[1];
+            document.getElementById("Time").innerHTML = systemInfoArray[2];
+            document.getElementById("OID").innerHTML = systemInfoArray[3];
+            document.getElementById("Contact").value = systemInfoArray[4];
+        }
+
+        xhttp.open("GET", "dataGet.php?data="+str);
+        xhttp.send();
+    }
+    </script>
+
 </body>
 
 </html>

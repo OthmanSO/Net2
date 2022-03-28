@@ -10,25 +10,51 @@
     <title>SNMP Maneger</title>
 </head>
 
-<body>
+<body onload="getUDP()">
 
-    <table>
+    <table id="udpTable">
         <tr>
             <td>UDPLocalAddress</td>
             <td>UDPLocalPort</td>
         </tr>
 
-        <tr>
+        <!-- <tr>
             <td id="UDPLocalAddress"></td>
             <td id="UDPLocalAddress"></td>
-        </tr>
+        </tr> -->
 
 
     </table>
 
 <a href="tcp.html">&lt;</a>
-<a href="index.html">home</a>
+<a href="index.html">home</a> 
 
+
+<script>
+    function getUDP(){
+        str = "UDP"; //connection value
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+
+            var udpAdressPortArray = (this.responseText).split("|"); //split address and array --> Adress,Port
+
+            for(let i =0 ; i<udpAdressPortArray.length ;i++){
+                var table = document.getElementById("udpTable");
+                var row = table.insertRow(i); //which row to be inserted
+                var cell1 = row.insertCell(0); //which column to be inserted
+                var cell2 = row.insertCell(1);
+
+                AP_ARR = udpAdressPortArray[i].split(","); //split every index in udpAdressPortArray (Adress,Port)
+
+                cell1.innerHTML = AP_ARR[0]; //the data that we need to insert it to cell
+                cell2.innerHTML = AP_ARR[1];
+            }
+        }
+
+        xhttp.open("GET", "dataGet.php?data="+str);
+        xhttp.send();
+    }
+</script>
 </body>
 
 </html>
