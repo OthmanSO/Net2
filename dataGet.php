@@ -10,5 +10,9 @@ if( isset($_GET['data']))
     echo getTCPInfo();
   elseif ($_GET['data'] == 'UDP')
     echo getUDPInfo();
-}else 
-  echo "Hot potato";
+}
+
+
+if ( isset($_GET['contact']) ){
+  setContact();
+}
