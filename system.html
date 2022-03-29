@@ -12,6 +12,7 @@
 
 <body>
 
+    <h1>System Info</h1>
     <form>
         <table>
             <tr>
@@ -46,11 +47,15 @@
 
         </table>
 
-        <input onclick="getSystemInfo()" type="submit" value="Update" />
-    </form>
+        <button onclick="getSystemInfo()" class="button">Update</button>
 
-    <a href="index.html">&lt;</a>
-    <a href="tcp.html">&gt;</a>
+        <!-- <input  onclick="getSystemInfo()"  type="submit" value="Update" /> -->
+    </form>
+<div class="nextBack">
+    <a href="index.html">&lt; Back</a>
+    <h6> &nbsp; &nbsp; . . . . . . . . . . . . . . . &nbsp; &nbsp; </h6>
+    <a href="tcp.html">Next &gt; </a>
+</div>
 
     <script>
         function getSystemInfo(){

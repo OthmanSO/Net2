@@ -1,6 +1,6 @@
 body {
-  /* display: flex; */
-  /* justify-content: center; */
+  /* display: flex;
+  justify-content: center; */
   align-items: center;
   /* flex-direction: column; */
   text-align: center;
@@ -8,8 +8,11 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 h1,
-p {
+p,
+h6,
+a {
   color: white;
+  /* text-decoration: none; */
 }
 
 .button {
@@ -31,4 +34,36 @@ p {
 .button:hover {
   background-color: #506d84;
   color: white;
+}
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 600px;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  /* margin: 20px; */
+}
+
+td,
+th {
+  /* color: white; */
+  border: 1px solid white;
+  /* border-radius: 5px; */
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(odd) {
+  background-color: #f0a500;
+}
+
+.nextBack {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  text-align: center;
 }
