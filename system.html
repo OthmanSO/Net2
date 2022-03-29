@@ -6,7 +6,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <link rel="stylesheet" href="style.css" />
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>SNMP Maneger</title>
 </head>
 
@@ -14,43 +14,54 @@
 
     <h1>System Info</h1>
     <form>
+        <!-- table to show the system info in a web page -->
         <table>
             <tr>
-                <td>Field</td>
+                <!-- what we need to show -->
+                <td>Field</td> 
+                <!-- the data of what we need to show -->
                 <td>Value</td>
             </tr>
 
             <tr>
+                <!-- the name and it's data -->
                 <td>Device Name</td>
                 <td id="Device Name"></td>
             </tr>
 
             <tr>
+                <!-- the description and it's data -->
                 <td>Description</td>
                 <td id="Description"></td>
             </tr>
 
             <tr>
+                <!-- the time and it's data -->
                 <td>Time</td>
                 <td id="Time"></td>
             </tr>
 
             <tr>
+                <!-- the OID and it's data -->
                 <td>OID</td>
                 <td id="OID"></td>
             </tr>
 
             <tr>
+                <!-- the contact and it's data -->
                 <td>Contact</td>
-                <td><input id="Contact" type="text" name="contact" value="" /></td>
+                <!-- an text feild to set the contact "the contact is changeable" -->
+                <td><input id="Contactname" type="text" name="contact" value="" /></td>
             </tr>
 
         </table>
 
-        <button onclick="getSystemInfo()" class="button">Update</button>
+        <!-- a button to update the contact  -->
+        <button onclick="setContact()" class="button">Update</button>
 
         <!-- <input  onclick="getSystemInfo()"  type="submit" value="Update" /> -->
     </form>
+    <p1 id="deteild"></p1>
 <div class="nextBack">
     <a href="index.html">&lt; Back</a>
     <h6> &nbsp; &nbsp; . . . . . . . . . . . . . . . &nbsp; &nbsp; </h6>
@@ -59,19 +70,31 @@
 
     <script>
         function getSystemInfo(){
-        str = "systeminfo"; //connection value
+        var str = "systeminfo"; //connection value
+        //const contact11 = document.getElementById('Contactname').value; //get the value for the contact to change it again
+       const xhttp = new XMLHttpRequest();
+       xhttp.onload = function() {
+                var systemInfoArray = (this.response).split("|&|"); //split the data that response from ajax
+                document.getElementById("Device Name").innerHTML = systemInfoArray[0];// put name in cell
+                document.getElementById("Description").innerHTML = systemInfoArray[1];//put Description in cell
+                document.getElementById("Time").innerHTML = systemInfoArray[2]; //put time
+                document.getElementById("OID").innerHTML = systemInfoArray[3]; //put OID
+                document.getElementById("Contactname").value = systemInfoArray[4];//put contact in text feild
+      }
+
+       xhttp.open("GET", "dataGet.php?data="+str); //send to ajax the data that we need 
+       xhttp.send();
+        
+    }
+
+    function setContact(){
+        var contact = document.getElementById('Contactname').value;
         const xhttp = new XMLHttpRequest();
         xhttp.onload = function() {
-            var systemInfoArray = (this.responseText).split("|&|");
-            document.getElementById("Device Name").innerHTML = systemInfoArray[0];
-            document.getElementById("Description").innerHTML = systemInfoArray[1];
-            document.getElementById("Time").innerHTML = systemInfoArray[2];
-            document.getElementById("OID").innerHTML = systemInfoArray[3];
-            document.getElementById("Contact").value = systemInfoArray[4];
-        }
-
-        xhttp.open("GET", "dataGet.php?data="+str);
-        xhttp.send();
+                document.getElementById("deteild").innerHTML = this.response;// put name in cell
+      }
+      xhttp.open("GET", "dataGet.php?contact="+contact); //send to ajax the data that we need 
+       xhttp.send();
     }
     </script>
 
