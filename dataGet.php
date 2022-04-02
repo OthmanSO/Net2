@@ -1,6 +1,6 @@
 <?php
 include 'Systeminfo.php';
-
+include 'UDPGetinfo.php';
 
 if( isset($_GET['data']))
 {
