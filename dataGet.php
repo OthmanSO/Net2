@@ -3,17 +3,17 @@ include 'Systeminfo.php';
 include 'UDPGetinfo.php';
 include 'TCPGetInfo.php';
 
-if( isset($_GET['data']))
+if( isset($_REQUEST['data']))
 {
-  if ( $_GET['data'] == 'systeminfo')
+  if ( $_REQUEST['data'] == 'systeminfo')
     echo getSysInfo();
-  elseif ($_GET['data'] == 'TCP')
+  elseif ($_REQUEST['data'] == 'TCP')
     echo getTCPInfo();
-  elseif ($_GET['data'] == 'UDP')
+  elseif ($_REQUEST['data'] == 'UDP')
     echo getUDPInfo();
 }
 
 
-if ( isset($_GET['contact']) ){
-  setContact();
+if ( isset($_REQUEST['contact']) ){
+  echo setContact();
 }

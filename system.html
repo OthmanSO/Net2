@@ -10,7 +10,7 @@
     <title>SNMP Maneger</title>
 </head>
 
-<body onload="getSystemInfo()">
+<body onload="setContact()">
 
     <h1>System Info</h1>
     <form>
@@ -83,18 +83,20 @@
       }
 
        xhttp.open("GET", "dataGet.php?data="+str); //send to ajax the data that we need 
-       xhttp.send();
-        
+       xhttp.send(); 
     }
 
     function setContact(){
-        var contact = document.getElementById('Contactname').value;
-        const xhttp = new XMLHttpRequest();
-        xhttp.onload = function() {
-                document.getElementById("deteild").innerHTML = this.response;// put name in cell
-      }
-      xhttp.open("GET", "dataGet.php?contact="+contact); //send to ajax the data that we need 
-       xhttp.send();
+        getSystemInfo();
+        str = document.getElementById('Contactname').value; //connection value
+        if(str != ""){
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function() {
+                    document.getElementById("deteild").innerHTML = this.responseText;
+            }
+            xhttp.open("GET", "dataGet.php?contact="+str);
+            xhttp.send();
+        }
     }
     </script>
 

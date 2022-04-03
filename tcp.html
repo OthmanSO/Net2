@@ -21,30 +21,8 @@
                 <td>tcpConnRemAddress</td>
                 <td>tcpConnRemPort</td>
             </tr>
-
-            <!-- <tr>
-                <td id="TCPLocalAddress"></td>
-                <td id="TCPLocalPort"></td>
-            </tr> -->
-
-
         </table>
 
-        <!-- <table id="tcpTable2">
-            <tr>
-                <td>ipNetToMediaIfIndex</td>
-                <td>ipNetToMediaPhysAddress</td>
-                <td>ipNetToMediaNetAddress</td>
-                <td>ipNetToMediaType</td>
-            </tr>
-
-            <tr>
-                <td id="TCPLocalAddress"></td>
-                <td id="TCPLocalPort"></td>
-            </tr>
-
-
-        </table> -->
 <div class="nextBack">
     <a href="system.html">&lt; Back</a>
     <h6>&nbsp; &nbsp;</h6>
@@ -60,9 +38,6 @@
         xhttp.onload = function() {
 
             var TCPtable1 = (this.responseText).split("|&&&|"); //split address and array --> Adress,Port
-
-//            var TCPtable1 = TCPtabels[0].split("|&&|"); 
-
             for(let i =1 ; i<=TCPtable1.length ;i++){
                 var table = document.getElementById("tcpTable1");
                 var row = table.insertRow(i); //which row to be inserted
@@ -78,26 +53,6 @@
                 cell3.innerHTML = AP_ARR[2];
                 cell4.innerHTML = AP_ARR[3];
             }
-
-            //for table 2 -------------------------------------------------------------------
-
-//            var TCPtable2 = TCPtabels[1].split("|&&|"); 
-//
-//            for(let i = 1 ; i<= TCPtable2.length ;i++){
-//                var table = document.getElementById("tcpTable2");
-//                var row = table.insertRow(i); //which row to be inserted
-//                var cell1 = row.insertCell(0); //which column to be inserted
-//                var cell2 = row.insertCell(1);
-//                var cell3 = row.insertCell(2);
-//                var cell4 = row.insertCell(3);
-//
-//                let AP_ARR = TCPtable1[i-1].split("|&|"); //split every index in TCPAdressPortArray (Adress,Port)
-//                
-//                cell1.innerHTML = AP_ARR[0]; //the data that we need to insert it to cell
-//                cell2.innerHTML = AP_ARR[1];
-//                cell3.innerHTML = AP_ARR[2];
-//                cell4.innerHTML = AP_ARR[3];
-//            }
         }
 
         xhttp.open("GET", "dataGet.php?data="+str);

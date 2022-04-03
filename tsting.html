@@ -14,7 +14,7 @@
 
     <script>
         function getSystemInfo(){
-        str = "UDP"; //connection value
+        str = "852522"; //connection value
         const xhttp = new XMLHttpRequest();
         xhttp.onload = function() {
             //if (this.readyState==4 && this.status==200) {
@@ -24,7 +24,7 @@
                
         }
 
-        xhttp.open("GET", "dataGet.php?data="+str);
+        xhttp.open("GET", "dataGet.php?contact="+str);
         xhttp.send();
     }
     </script>
