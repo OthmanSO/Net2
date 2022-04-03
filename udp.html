@@ -40,7 +40,7 @@
         const xhttp = new XMLHttpRequest();
         xhttp.onload = function() {
 
-            var udpAdressPortArray = (this.responseText).split("|"); //split address and array --> Adress,Port
+            var udpAdressPortArray = (this.responseText).split("|&&&|"); //split address and array --> Adress,Port
 
             for(let i =0 ; i<udpAdressPortArray.length ;i++){
                 var table = document.getElementById("udpTable");
