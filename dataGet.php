@@ -1,6 +1,7 @@
 <?php
 include 'Systeminfo.php';
 include 'UDPGetinfo.php';
+include 'TCPGetInfo.php';
 
 if( isset($_GET['data']))
 {
