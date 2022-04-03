@@ -42,13 +42,13 @@
 
             var udpAdressPortArray = (this.responseText).split("|&&&|"); //split address and array --> Adress,Port
 
-            for(let i =0 ; i<udpAdressPortArray.length ;i++){
+            for(let i =1 ; i<=udpAdressPortArray.length ;i++){
                 var table = document.getElementById("udpTable");
                 var row = table.insertRow(i); //which row to be inserted
                 var cell1 = row.insertCell(0); //which column to be inserted
                 var cell2 = row.insertCell(1);
 
-                AP_ARR = udpAdressPortArray[i].split(","); //split every index in udpAdressPortArray (Adress,Port)
+                AP_ARR = udpAdressPortArray[i-1].split(","); //split every index in udpAdressPortArray (Adress,Port)
 
                 cell1.innerHTML = AP_ARR[0]; //the data that we need to insert it to cell
                 cell2.innerHTML = AP_ARR[1];
