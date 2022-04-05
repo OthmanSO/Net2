@@ -23,7 +23,7 @@ function setContact(){
             "snmp",
             ".1.3.6.1.2.1.1.4.0",
             "s",
-            $_GET['contact'],
+            $_REQUEST['contact'],
             );
         
     if( $tmp )
