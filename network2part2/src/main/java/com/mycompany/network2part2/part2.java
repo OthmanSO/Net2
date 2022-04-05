@@ -59,6 +59,8 @@ public class part2 extends javax.swing.JFrame  {
         page = new javax.swing.JTextArea();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
+        jButton3 = new javax.swing.JButton();
+        contactTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(700, 1000));
@@ -94,6 +96,13 @@ public class part2 extends javax.swing.JFrame  {
 
         jRadioButton2.setText("Send POST");
 
+        jButton3.setText("change contact");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -114,7 +123,12 @@ public class part2 extends javax.swing.JFrame  {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(34, 34, 34)
-                        .addComponent(note, javax.swing.GroupLayout.PREFERRED_SIZE, 587, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(note, javax.swing.GroupLayout.PREFERRED_SIZE, 587, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(contactTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -132,7 +146,11 @@ public class part2 extends javax.swing.JFrame  {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jRadioButton2)))
                 .addGap(35, 35, 35)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(contactTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(note, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -144,7 +162,8 @@ public class part2 extends javax.swing.JFrame  {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         if(jRadioButton1.isSelected()){
-            String data = sendData_GET("http://127.0.0.1:90/Net2/Net2/dataGet.php?data=systeminfo");
+            String data = sendData_GET("data=systeminfo");//http://127.0.0.1:90/Net2/Net2/dataGet.php?data=systeminfo
+            System.err.println(data+"741255885555");
             String [] system_arr  =  data.split("\\|&\\|");
             String [] Field = {"Device Name","Description","Time","OID","Contact"};
             page.setText("");
@@ -152,7 +171,7 @@ public class part2 extends javax.swing.JFrame  {
                 page.append(Field[i] + " : " + system_arr[i] + '\n');
             }
         }if(jRadioButton2.isSelected()){
-            String data = sendData_POST("http://127.0.0.1:90/Net2/Net2/dataGet.php","systeminfo");
+            String data = sendData_POST("http://127.0.0.1:90/Net2/Net2/dataGet.php","data","systeminfo");
             String [] system_arr  =  data.split("\\|&\\|");
             String [] Field = {"Device Name","Description","Time","OID","Contact"};
             page.setText("");
@@ -165,7 +184,7 @@ public class part2 extends javax.swing.JFrame  {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         if(jRadioButton1.isSelected()){
-            String data = sendData_GET("http://127.0.0.1:90/Net2/Net2/dataGet.php?data=TCP");
+            String data = sendData_GET("data=TCP");//http://127.0.0.1:90/Net2/Net2/dataGet.php?data=TCP
             String [] system_arr  =  data.split("\\|&&&\\|");
             page.setText("tcpConnLocalAddress     tcpConnLocalPort                tcpConnRemAddress                tcpConnRemPort \n");
             for(int i = 0 ; i < system_arr.length ; i++){
@@ -174,7 +193,7 @@ public class part2 extends javax.swing.JFrame  {
                         row[2] + "                                          " + row[3] + "                                          " +'\n');
             }
         }if(jRadioButton2.isSelected()){
-            String data = sendData_POST("http://127.0.0.1:90/Net2/Net2/dataGet.php","TCP");
+            String data = sendData_POST("http://127.0.0.1:90/Net2/Net2/dataGet.php","data","TCP");
             System.out.println("hellooooooooooooooo"+data);
             String [] system_arr  =  data.split("\\|&&&\\|");
             page.setText("tcpConnLocalAddress     tcpConnLocalPort                tcpConnRemAddress                tcpConnRemPort \n");
@@ -190,12 +209,30 @@ public class part2 extends javax.swing.JFrame  {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        if(!contactTextField.getText().isEmpty()){
+            if(jRadioButton1.isSelected()){
+                String contactValue = contactTextField.getText();
+                String data = sendData_GET("contact="+contactValue);//http://127.0.0.1:90/Net2/Net2/dataGet.php?data=TCP
+                page.setText(data);
+            }
+            if(jRadioButton2.isSelected()){
+                String contactValue = contactTextField.getText();
+                String data = sendData_POST("http://127.0.0.1:90/Net2/Net2/dataGet.php","contact",contactValue);
+                page.setText(data);
+            }
+        }else{
+            JOptionPane.showMessageDialog(this,"the text feild is empty" );
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
     //next code for send data with post 
     String contentStr = "application/x-www-form-urlencoded";
-    String sendData_POST(String str,String dataStr) {
+    String sendData_POST(String str,String var,String dataStr) {
  
         InputStream is;
         String urlStr = str;
@@ -210,7 +247,7 @@ public class part2 extends javax.swing.JFrame  {
             myConn.setUseCaches(false);
             this.note.setText("POST: sending to " + str +" data:"+dataStr);
             BufferedOutputStream out = new BufferedOutputStream(myConn.getOutputStream());
-            out.write(("data="+dataStr).getBytes());//"ACTION=add&NUMPTS=2&DATA=L0001\nL0002");
+            out.write((var+"="+dataStr).getBytes());//"ACTION=add&NUMPTS=2&DATA=L0001\nL0002");
             out.close();
 
             //out.close();
@@ -234,10 +271,12 @@ public class part2 extends javax.swing.JFrame  {
     //next code for send data with get
     String sendData_GET(String str) {
         DataInputStream dis;
-
+        
+        String urlString = "http://127.0.0.1:90/Net2/Net2/dataGet.php?"+str;
+        System.err.println(urlString);
         try {
-            URL u = new URL(str);
-            this.note.setText("GET: sending to " + str);
+            URL u = new URL(urlString);
+            this.note.setText("GET: sending to " + urlString);
 
             dis = new DataInputStream(u.openConnection().getInputStream());
             int b;
@@ -249,7 +288,7 @@ public class part2 extends javax.swing.JFrame  {
             }
             return SS;
         } catch (Exception e) {
-            System.out.println(e.toString());
+            //System.out.println(e.toString());
             this.note.setText("Faild: exception");
         }
 return null;
@@ -288,8 +327,10 @@ return null;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField contactTextField;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
